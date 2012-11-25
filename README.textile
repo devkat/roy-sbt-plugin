@@ -55,13 +55,13 @@ The following configuration for the "xsbt-web-plugin":https://github.com/siasia/
 bc. import com.github.siasia.PluginKeys._
 
 bc. settings = BuildSettings.buildSettings ++ (
-    É
+    â€¦
     ++ webSettings ++ Seq(
      (webappResources in Compile) <+= (resourceManaged in Compile) apply {
        r => file(r.getAbsolutePath() + "/webapp")
      }
     )
-    É
+    â€¦
   )
 
 
