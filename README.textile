@@ -1,10 +1,10 @@
 h1. roy-sbt-plugin: Compile Roy sources to JavaScript
 
-(C) Andreas Hartmann
+(C) "Andreas Hartmann"http://www.devkat.net
 
 h2. Credits
 
-Thanks to "Brian McKenna": http://brianmckenna.org for providing the Roy language. Parts of his Roy plugin for Play ("Ray":https://github.com/pufuwozu/ray) have been used for this plugin.
+Thanks to "Brian McKenna":https://github.com/pufuwozu/ for providing the Roy language. Parts of his Roy plugin for Play ("Ray":https://github.com/pufuwozu/ray) have been used for this plugin.
 
 Some code has been used from the "Untyped SBT Plugins":https://github.com/untyped/sbt-plugins/.
 
@@ -13,6 +13,10 @@ h2. Installation
 Add the following line to your @project/build.sbt@ file:
 
 bc. addSbtPlugin("net.devkat" %% "roy-sbt-plugin" % "1.0-SNAPSHOT")
+
+h2. Issues
+
+At the moment the whole project is compiled when a Roy source file changes. Any hints how to compile only the affected Roy files are greatly appreciated.
 
 h2. Configuration
 
@@ -34,7 +38,7 @@ import net.devkat.sbtroy.RoyPlugin.PathFilter
 bc. lazy val web: Project = Project("my-web-project", file("web"),
   settings = BuildSettings.buildSettings ++ (
     roySettings ++ Seq(
-      royExcludeFilter in Compile += new PathFilter("**/vendor/roy/**")
+      royExcludeFilter in Compile += new PathFilter("**/my/excluded/path/**")
     )
   )
 )
