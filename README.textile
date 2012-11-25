@@ -48,6 +48,23 @@ bc. lazy val web: Project = Project("my-web-project", file("web"),
   )
 )
 
+h2. Include generated JavaScript files in web application resource path
+
+The following configuration for the "xsbt-web-plugin":https://github.com/siasia/xsbt-web-plugin works e.g. for the "Lift":http://liftweb.net web application framework:
+
+bc. import com.github.siasia.PluginKeys._
+
+  settings = BuildSettings.buildSettings ++ (
+    É
+    ++ webSettings ++ Seq(
+     (webappResources in Compile) <+= (resourceManaged in Compile) apply {
+       r => file(r.getAbsolutePath() + "/webapp")
+     }
+    )
+    É
+  )
+
+
 h2. License
 
 The Roy SBT plugin is licensed unter the "Apache License, Version 2.0":http://www.apache.org/licenses/LICENSE-2.0.html.
