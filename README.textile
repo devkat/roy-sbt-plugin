@@ -12,7 +12,12 @@ h2. Installation
 
 Add the following line to your @project/build.sbt@ file:
 
-bc. addSbtPlugin("net.devkat" %% "roy-sbt-plugin" % "1.0-SNAPSHOT")
+bc. addSbtPlugin("net.devkat" %% "roy-sbt-plugin" % "0.1")
+
+After you start your web project, changes in Roy sources will be automatically detected and the sources recompiled:
+
+bc. sbt
+> ~;container:start; container:reload /
 
 h2. Issues
 
