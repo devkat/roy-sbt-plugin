@@ -1,0 +1,44 @@
+h1. roy-sbt-plugin: Compile Roy sources to JavaScript
+
+(C) Andreas Hartmann
+
+h2. Credits
+
+Thanks to "Brian McKenna": http://brianmckenna.org for providing the Roy language. Parts of his Roy plugin for Play ("Ray":https://github.com/pufuwozu/ray) have been used for this plugin.
+
+Some code has been used from the "Untyped SBT Plugins":https://github.com/untyped/sbt-plugins/.
+
+h2. Installation
+
+Add the following line to your @project/build.sbt@ file:
+
+bc. addSbtPlugin("net.devkat" %% "roy-sbt-plugin" % "1.0-SNAPSHOT")
+
+h2. Configuration
+
+The plugin offers the following keys:
+
+bc. object RoyKeys {
+  val roy = TaskKey[Seq[File]]("roy", "Compile Roy sources")
+  val royIncludeFilter = SettingKey[FileFilter]("roy-include-filter", "Include filter")
+  val royExcludeFilter = SettingKey[Seq[FileFilter]]("roy-exclude-filter", "Exclude filter")
+  val royCompilerOptions = SettingKey[Seq[String]]("roy-compiler-options", "Options for the Roy compiler")
+}
+
+The following example shows how to configure an exclude filter in @project/Build.scala@. The plugin provides a @PathFilter@ class for wildcard path patterns.
+
+bc. import net.devkat.sbtroy.RoyPlugin._
+import net.devkat.sbtroy.RoyPlugin.RoyKeys._
+import net.devkat.sbtroy.RoyPlugin.PathFilter
+
+bc. lazy val web: Project = Project("my-web-project", file("web"),
+  settings = BuildSettings.buildSettings ++ (
+    roySettings ++ Seq(
+      royExcludeFilter in Compile += new PathFilter("**/vendor/roy/**")
+    )
+  )
+)
+
+h2. License
+
+The Roy SBT plugin is licensed unter the "Apache License, Version 2.0":http://www.apache.org/licenses/LICENSE-2.0.html.

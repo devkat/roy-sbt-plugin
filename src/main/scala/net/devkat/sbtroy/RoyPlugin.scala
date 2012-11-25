@@ -70,11 +70,14 @@ object RoyPlugin extends Plugin {
       sourceDirectory in roy       <<=  (sourceDirectory in conf),
       sourceDirectories in roy     <<=  (sourceDirectory in (conf, roy)) { Seq(_) },
       sources in roy               <<=  sourcesTask,
+      unmanagedResources in conf   <++= sources,
       resourceManaged in roy       <<=  (resourceManaged in conf),
       royCompilerOptions           :=   Seq(),
       roy                          <<=  compileTask,
       resourceGenerators           <+=  roy
-    ))
+    )) ++ Seq(
+      watchSources                 <++= (sources in roy in conf)
+    )
 
   def roySettings: Seq[Setting[_]] =
     roySettingsIn(Compile) ++
