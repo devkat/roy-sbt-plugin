@@ -54,7 +54,7 @@ The following configuration for the "xsbt-web-plugin":https://github.com/siasia/
 
 bc. import com.github.siasia.PluginKeys._
 
-  settings = BuildSettings.buildSettings ++ (
+bc. settings = BuildSettings.buildSettings ++ (
     É
     ++ webSettings ++ Seq(
      (webappResources in Compile) <+= (resourceManaged in Compile) apply {
